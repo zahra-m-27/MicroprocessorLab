@@ -1,15 +1,8 @@
 #include <avr/io.h>    
-#include <avr/delay.h>
 #include <avr/interrupt.h>
 
-
-#define a1 (1<<PD4)
-#define a2 (1<<PD5)
-#define a3 (1<<PD6)
-#define a4  (1<<PD7)
 #define Switch (1<<PC2)
 
- 
 int i=0; 
 volatile uint8_t count =0;
 unsigned char step[4]= {0x90, 0x50, 0x60, 0xa0};
@@ -32,8 +25,6 @@ int main(void){
 	while(1){
 
 		if(count>=3 & !(PINC & Switch)){
-            TCNT0 = 0;
-            while (TCNT0 <= 113);
             
             PORTD = step[i];
             TCNT0 = 0;
